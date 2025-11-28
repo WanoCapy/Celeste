@@ -5,7 +5,7 @@
 
 <head>
     <base href="https://cdn.jsdelivr.net/gh/web-ports/celeste@4f043a5ce121b74dc54ce56d74f213a2eeea6b4e/">
-    <title>CelesteWasm</title>
+    <title>Celeste Web Port</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -19,9 +19,47 @@
     <script src="cfg.js"></script>
     <script src="data.js"></script>
     <script type="module" src="bundle.js"></script>
+    <style>
+        #fullscreen-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        #fullscreen-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('fullscreen-btn');
+            btn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
+    <button id="fullscreen-btn" title="Toggle Fullscreen">⛶</button>
     <div id="loading-textt" style="color: black; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px;">LOADING DOT.NET...</div>
 </body>
 
